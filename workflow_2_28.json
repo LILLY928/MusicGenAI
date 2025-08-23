@@ -1,0 +1,962 @@
+{
+  "last_node_id": 164,
+  "last_link_id": 101,
+  "nodes": [
+    {
+      "id": 20,
+      "type": "CLIPLoader",
+      "pos": [
+        -550,
+        340
+      ],
+      "size": [
+        530.3651123046875,
+        97.52654266357422
+      ],
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "CLIP",
+          "type": "CLIP",
+          "shape": 3,
+          "links": [
+            54
+          ],
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CLIPLoader"
+      },
+      "widgets_values": [
+        "t5/google_t5-v1_1-xxl_encoderonly-fp8_e4m3fn.safetensors",
+        "sd3",
+        "default"
+      ]
+    },
+    {
+      "id": 151,
+      "type": "CR Upscale Image",
+      "pos": [
+        2345.435546875,
+        1289.7142333984375
+      ],
+      "size": [
+        412.2754821777344,
+        247.90908813476562
+      ],
+      "flags": {},
+      "order": 9,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 94,
+          "slot_index": 0
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "shape": 3,
+          "links": [
+            92
+          ],
+          "slot_index": 0
+        },
+        {
+          "name": "show_help",
+          "type": "STRING",
+          "shape": 3,
+          "links": null,
+          "slot_index": 1
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CR Upscale Image",
+        "ttNbgOverride": {
+          "color": "#322",
+          "bgcolor": "#533",
+          "groupcolor": "#A88"
+        }
+      },
+      "widgets_values": [
+        "4x_NMKD-Superscale-SP_178000_G.pth",
+        "rescale",
+        4,
+        720,
+        "lanczos",
+        "true",
+        16
+      ],
+      "color": "#322",
+      "bgcolor": "#533"
+    },
+    {
+      "id": 3,
+      "type": "ReActorFaceSwap",
+      "pos": [
+        1066.9176025390625,
+        1538.2171630859375
+      ],
+      "size": [
+        323.84332275390625,
+        358
+      ],
+      "flags": {},
+      "order": 7,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "input_image",
+          "type": "IMAGE",
+          "link": 101
+        },
+        {
+          "name": "source_image",
+          "type": "IMAGE",
+          "shape": 7,
+          "link": 65
+        },
+        {
+          "name": "face_model",
+          "type": "FACE_MODEL",
+          "shape": 7,
+          "link": null
+        },
+        {
+          "name": "face_boost",
+          "type": "FACE_BOOST",
+          "shape": 7,
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "shape": 3,
+          "links": [
+            66,
+            94
+          ],
+          "slot_index": 0
+        },
+        {
+          "name": "FACE_MODEL",
+          "type": "FACE_MODEL",
+          "shape": 3,
+          "links": null
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ReActorFaceSwap"
+      },
+      "widgets_values": [
+        true,
+        "inswapper_128.onnx",
+        "retinaface_resnet50",
+        "GFPGANv1.4.pth",
+        1,
+        0.75,
+        "male",
+        "female",
+        "0",
+        "0",
+        1
+      ]
+    },
+    {
+      "id": 154,
+      "type": "VHS_VideoCombine",
+      "pos": [
+        3031.385009765625,
+        1188.564208984375
+      ],
+      "size": [
+        525.9095458984375,
+        376
+      ],
+      "flags": {},
+      "order": 11,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 92
+        },
+        {
+          "name": "audio",
+          "type": "AUDIO",
+          "shape": 7,
+          "link": null
+        },
+        {
+          "name": "meta_batch",
+          "type": "VHS_BatchManager",
+          "shape": 7,
+          "link": null
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "shape": 7,
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "Filenames",
+          "type": "VHS_FILENAMES",
+          "shape": 3,
+          "links": null
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "VHS_VideoCombine"
+      },
+      "widgets_values": {
+        "frame_rate": 8,
+        "loop_count": 0,
+        "filename_prefix": "AnimateDiff",
+        "format": "video/h264-mp4",
+        "pix_fmt": "yuv420p",
+        "crf": 19,
+        "save_metadata": true,
+        "trim_to_audio": false,
+        "pingpong": false,
+        "save_output": true,
+        "videopreview": {
+          "hidden": false,
+          "paused": false,
+          "params": {
+            "filename": "AnimateDiff_00001.gif",
+            "subfolder": "",
+            "type": "output",
+            "format": "image/gif",
+            "frame_rate": 8,
+            "workflow": "AnimateDiff_00001.png",
+            "fullpath": "/content/drive/MyDrive/ComfyUI/output/AnimateDiff_00001.gif"
+          }
+        }
+      }
+    },
+    {
+      "id": 31,
+      "type": "CogVideoTextEncode",
+      "pos": [
+        40,
+        480
+      ],
+      "size": [
+        463.01251220703125,
+        144
+      ],
+      "flags": {},
+      "order": 8,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 83
+        }
+      ],
+      "outputs": [
+        {
+          "name": "conditioning",
+          "type": "CONDITIONING",
+          "shape": 3,
+          "links": [
+            88
+          ],
+          "slot_index": 0
+        },
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "links": null
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CogVideoTextEncode"
+      },
+      "widgets_values": [
+        "",
+        1,
+        true
+      ]
+    },
+    {
+      "id": 30,
+      "type": "CogVideoTextEncode",
+      "pos": [
+        40,
+        250
+      ],
+      "size": [
+        479.7539367675781,
+        181.9112548828125
+      ],
+      "flags": {},
+      "order": 6,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 54
+        }
+      ],
+      "outputs": [
+        {
+          "name": "conditioning",
+          "type": "CONDITIONING",
+          "shape": 3,
+          "links": [
+            87
+          ],
+          "slot_index": 0
+        },
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "links": [
+            83
+          ],
+          "slot_index": 1
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CogVideoTextEncode"
+      },
+      "widgets_values": [
+        "A young Asian man with shoulder-length black hair, wearing a stylish black outfit, playing an acoustic guitar on a dimly lit stage. His full face is visible, showing a calm and focused expression as he strums the guitar. A microphone stand is positioned near him, and a music stand with sheet music is in front of him. The stage lighting casts a soft, warm glow on his face, and the background features an intimate live music setting with visible metal beams and soft blue ambient lighting. The scene captures the artistic mood of a live performance, emphasizing the details of the guitar, the musician’s fingers on the strings, and the relaxed yet passionate vibe of the moment.",
+        1,
+        true
+      ]
+    },
+    {
+      "id": 8,
+      "type": "LoadImage",
+      "pos": [
+        376.9169921875,
+        1688.217041015625
+      ],
+      "size": [
+        406.05999755859375,
+        383.0321350097656
+      ],
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "shape": 3,
+          "links": [
+            65
+          ],
+          "slot_index": 0
+        },
+        {
+          "name": "MASK",
+          "type": "MASK",
+          "shape": 3,
+          "links": null
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LoadImage"
+      },
+      "widgets_values": [
+        "Wong_Ka_Kui.png",
+        "image"
+      ]
+    },
+    {
+      "id": 1,
+      "type": "DownloadAndLoadCogVideoModel",
+      "pos": [
+        141.0772247314453,
+        -24.41363525390625
+      ],
+      "size": [
+        315,
+        218
+      ],
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "block_edit",
+          "type": "TRANSFORMERBLOCKS",
+          "shape": 7,
+          "link": null
+        },
+        {
+          "name": "lora",
+          "type": "COGLORA",
+          "shape": 7,
+          "link": null
+        },
+        {
+          "name": "compile_args",
+          "type": "COMPILEARGS",
+          "shape": 7,
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "model",
+          "type": "COGVIDEOMODEL",
+          "shape": 3,
+          "links": [
+            86
+          ],
+          "slot_index": 0
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "links": [
+            84
+          ],
+          "slot_index": 1
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "DownloadAndLoadCogVideoModel"
+      },
+      "widgets_values": [
+        "THUDM/CogVideoX-5b",
+        "bf16",
+        "disabled",
+        "disabled",
+        "sdpa",
+        "main_device"
+      ]
+    },
+    {
+      "id": 155,
+      "type": "CogVideoSampler",
+      "pos": [
+        580,
+        300
+      ],
+      "size": [
+        330,
+        402
+      ],
+      "flags": {},
+      "order": 10,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "COGVIDEOMODEL",
+          "link": 86
+        },
+        {
+          "name": "positive",
+          "type": "CONDITIONING",
+          "link": 87
+        },
+        {
+          "name": "negative",
+          "type": "CONDITIONING",
+          "link": 88
+        },
+        {
+          "name": "samples",
+          "type": "LATENT",
+          "shape": 7,
+          "link": 98
+        },
+        {
+          "name": "image_cond_latents",
+          "type": "LATENT",
+          "shape": 7,
+          "link": null
+        },
+        {
+          "name": "context_options",
+          "type": "COGCONTEXT",
+          "shape": 7,
+          "link": null
+        },
+        {
+          "name": "controlnet",
+          "type": "COGVIDECONTROLNET",
+          "shape": 7,
+          "link": null
+        },
+        {
+          "name": "tora_trajectory",
+          "type": "TORAFEATURES",
+          "shape": 7,
+          "link": null
+        },
+        {
+          "name": "fastercache",
+          "type": "FASTERCACHEARGS",
+          "shape": 7,
+          "link": null
+        },
+        {
+          "name": "feta_args",
+          "type": "FETAARGS",
+          "shape": 7,
+          "link": null
+        },
+        {
+          "name": "teacache_args",
+          "type": "TEACACHEARGS",
+          "shape": 7,
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "samples",
+          "type": "LATENT",
+          "links": [
+            89
+          ],
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CogVideoSampler"
+      },
+      "widgets_values": [
+        49,
+        50,
+        6,
+        0,
+        "fixed",
+        "CogVideoXDDIM",
+        1
+      ]
+    },
+    {
+      "id": 153,
+      "type": "Note",
+      "pos": [
+        38.79998016357422,
+        684.556396484375
+      ],
+      "size": [
+        480.46319580078125,
+        200.9027862548828
+      ],
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [],
+      "properties": {
+        "text": ""
+      },
+      "widgets_values": [
+        "A young Asian man with shoulder-length black hair, wearing a stylish black outfit, playing an acoustic guitar on a dimly lit stage. His full face is visible, showing a calm and focused expression as he strums the guitar. A microphone stand is positioned near him, and a music stand with sheet music is in front of him. The stage lighting casts a soft, warm glow on his face, and the background features an intimate live music setting with visible metal beams and soft blue ambient lighting. The scene captures the artistic mood of a live performance, emphasizing the details of the guitar, the musician’s fingers on the strings, and the relaxed yet passionate vibe of the moment."
+      ],
+      "color": "#432",
+      "bgcolor": "#653"
+    },
+    {
+      "id": 161,
+      "type": "EmptyLatentImage",
+      "pos": [
+        597.84912109375,
+        768.2174682617188
+      ],
+      "size": [
+        315,
+        106
+      ],
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "links": [
+            98
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "EmptyLatentImage"
+      },
+      "widgets_values": [
+        720,
+        480,
+        1
+      ]
+    },
+    {
+      "id": 37,
+      "type": "ImageScale",
+      "pos": [
+        980,
+        390
+      ],
+      "size": [
+        315,
+        130
+      ],
+      "flags": {},
+      "order": 5,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "shape": 3,
+          "links": [
+            80
+          ],
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ImageScale"
+      },
+      "widgets_values": [
+        "lanczos",
+        720,
+        480,
+        "disabled"
+      ]
+    },
+    {
+      "id": 11,
+      "type": "CogVideoDecode",
+      "pos": [
+        683.6298828125,
+        23.07496452331543
+      ],
+      "size": [
+        274.6167297363281,
+        198
+      ],
+      "flags": {},
+      "order": 12,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": 84
+        },
+        {
+          "name": "samples",
+          "type": "LATENT",
+          "link": 89
+        }
+      ],
+      "outputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "shape": 3,
+          "links": [
+            100,
+            101
+          ],
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CogVideoDecode"
+      },
+      "widgets_values": [
+        false,
+        240,
+        360,
+        0.2,
+        0.2,
+        true
+      ]
+    },
+    {
+      "id": 159,
+      "type": "VHS_VideoCombine",
+      "pos": [
+        1361.9124755859375,
+        367.4190979003906
+      ],
+      "size": [
+        525.9095458984375,
+        376
+      ],
+      "flags": {},
+      "order": 13,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 100
+        },
+        {
+          "name": "audio",
+          "type": "AUDIO",
+          "shape": 7,
+          "link": null
+        },
+        {
+          "name": "meta_batch",
+          "type": "VHS_BatchManager",
+          "shape": 7,
+          "link": null
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "shape": 7,
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "Filenames",
+          "type": "VHS_FILENAMES",
+          "shape": 3,
+          "links": null
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "VHS_VideoCombine"
+      },
+      "widgets_values": {
+        "frame_rate": 8,
+        "loop_count": 0,
+        "filename_prefix": "CogVideo",
+        "format": "video/h264-mp4",
+        "pix_fmt": "yuv420p",
+        "crf": 19,
+        "save_metadata": true,
+        "trim_to_audio": false,
+        "pingpong": false,
+        "save_output": true,
+        "videopreview": {
+          "hidden": false,
+          "paused": false,
+          "params": {
+            "filename": "CogVideo_00002.mp4",
+            "subfolder": "",
+            "type": "output",
+            "format": "video/h264-mp4",
+            "frame_rate": 8,
+            "workflow": "CogVideo_00002.png",
+            "fullpath": "/content/drive/MyDrive/ComfyUI/output/CogVideo_00002.mp4"
+          }
+        }
+      }
+    }
+  ],
+  "links": [
+    [
+      54,
+      20,
+      0,
+      30,
+      0,
+      "CLIP"
+    ],
+    [
+      65,
+      8,
+      0,
+      3,
+      1,
+      "IMAGE"
+    ],
+    [
+      80,
+      37,
+      0,
+      3,
+      0,
+      "IMAGE"
+    ],
+    [
+      83,
+      30,
+      1,
+      31,
+      0,
+      "CLIP"
+    ],
+    [
+      84,
+      1,
+      1,
+      11,
+      0,
+      "VAE"
+    ],
+    [
+      86,
+      1,
+      0,
+      155,
+      0,
+      "COGVIDEOMODEL"
+    ],
+    [
+      87,
+      30,
+      0,
+      155,
+      1,
+      "CONDITIONING"
+    ],
+    [
+      88,
+      31,
+      0,
+      155,
+      2,
+      "CONDITIONING"
+    ],
+    [
+      89,
+      155,
+      0,
+      11,
+      1,
+      "LATENT"
+    ],
+    [
+      92,
+      151,
+      0,
+      154,
+      0,
+      "IMAGE"
+    ],
+    [
+      94,
+      3,
+      0,
+      151,
+      0,
+      "IMAGE"
+    ],
+    [
+      98,
+      161,
+      0,
+      155,
+      3,
+      "LATENT"
+    ],
+    [
+      100,
+      11,
+      0,
+      159,
+      0,
+      "IMAGE"
+    ],
+    [
+      101,
+      11,
+      0,
+      3,
+      0,
+      "IMAGE"
+    ]
+  ],
+  "groups": [
+    {
+      "id": 1,
+      "title": "FaceSwap",
+      "bounding": [
+        116.91683959960938,
+        1038.2171630859375,
+        2015,
+        1106
+      ],
+      "color": "#3f789e",
+      "font_size": 24,
+      "flags": {}
+    },
+    {
+      "id": 2,
+      "title": "txt2vid",
+      "bounding": [
+        -570,
+        -40,
+        2422,
+        987
+      ],
+      "color": "#8A8",
+      "font_size": 24,
+      "flags": {}
+    },
+    {
+      "id": 3,
+      "title": "UpscaleVid",
+      "bounding": [
+        2141.38427734375,
+        1038.5640869140625,
+        1429,
+        890
+      ],
+      "color": "#b06634",
+      "font_size": 24,
+      "flags": {}
+    }
+  ],
+  "config": {},
+  "extra": {
+    "ds": {
+      "scale": 0.6209213230591555,
+      "offset": {
+        "0": -2141.13037109375,
+        "1": -890.4603271484375
+      }
+    },
+    "workspace_info": {
+      "id": "lR6IoOdmKQNnOCJS052_u",
+      "saveLock": false,
+      "cloudID": null,
+      "coverMediaPath": null
+    },
+    "node_versions": {
+      "comfy-core": "0.3.18",
+      "ComfyUI_Comfyroll_CustomNodes": "d78b780ae43fcf8c6b7c6505e6ffb4584281ceca",
+      "ComfyUI-ReActor": "d2318ad140582c6d0b68c51df342319b502006ed",
+      "ComfyUI-VideoHelperSuite": "8629188458dc6cb832f871ece3bd273507e8a766",
+      "ComfyUI-CogVideoXWrapper": "dbc63f622dd095391335612d0c7d7bbff8745cc8"
+    },
+    "VHS_latentpreview": false,
+    "VHS_latentpreviewrate": 0,
+    "VHS_MetadataImage": true,
+    "VHS_KeepIntermediate": true
+  },
+  "version": 0.4
+}
